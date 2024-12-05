@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+
+  <ibm-simple-bar-chart [data]="bar_data" [options]="bar_options" class="chart"></ibm-simple-bar-chart>
+  <ibm-choropleth-chart [data]="choropleth_data" [options]="choropleth_options" class="chart"></ibm-choropleth-chart>
+  <ibm-combo-chart [data]="combo_data" [options]="combo_options" class="chart"></ibm-combo-chart>
+  <ibm-simple-bar-chart [data]="rocketsData" [options]="rocketsOptions" class="chart"></ibm-simple-bar-chart>
+</div>
+
+<router-outlet />

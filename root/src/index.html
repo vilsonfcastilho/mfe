@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';">
+  <meta name="importmap-type" content="systemjs-importmap">
+
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/single-spa/5.5.0/system/single-spa.min.js" as="script" crossorigin="anonymous" />
+  <link rel="preload" href="https://unpkg.com/light-event-bus@1.0.0/build/light-event-bus.min.js" as="script" />
+
+  <title>Root Config</title>
+
+  <script type="systemjs-importmap">
+    {
+      "imports": {
+        "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
+        "react": "https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.production.min.js",
+        "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.production.min.js",
+        "angular-todo-app": "//localhost:4201/main.js",
+        "angular-app-2": "//localhost:4202/main.js",
+        "react-pomodoro-app": "//localhost:4101/main.js"
+      }
+    }
+  </script>
+
+  <script src='https://unpkg.com/core-js-bundle@3.1.4/minified.js'></script>
+  <script src="https://unpkg.com/zone.js@0.10.3/dist/zone.js"></script>
+  <script src="https://unpkg.com/import-map-overrides@1.15.1/dist/import-map-overrides.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/4.0.0/system.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/4.0.0/extras/amd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/4.0.0/extras/named-exports.js"></script>
+</head>
+<body>
+  <script>
+    Promise.all([System.import('single-spa'), System.import('react'), System.import('react-dom')]).then(([singleSpa]) => {
+      const { registerApplication, start } = singleSpa;
+
+      registerApplication({
+        name: 'angular-todo-app',
+        app: () => System.import('angular-todo-app'),
+        activeWhen: ['/angular-todo-app'],
+      });
+
+      registerApplication({
+        name: 'angular-app-2',
+        app: () => System.import('angular-app-2'),
+        activeWhen: ['/angular-app-2'],
+      });
+
+      registerApplication({
+        name: 'react-pomodoro-app',
+        app: () => System.import('react-pomodoro-app'),
+        activeWhen: ['/react-pomodoro-app'],
+      });
+
+      start({ urlRerouteOnly: true });
+    });
+  </script>
+
+  <div class="navbar">
+    <ul>
+      <a onclick="singleSpaNavigate('/angular-todo-app')">
+        <li>
+          Angular Todo App
+        </li>
+      </a>
+      <a onclick="singleSpaNavigate('/angular-app-2')">
+        <li>
+          Angular App 2
+        </li>
+      </a>
+      <a onclick="singleSpaNavigate('/react-pomodoro-app')">
+        <li>
+          React Pomodoro App
+        </li>
+      </a>
+    </ul>
+  </div>
+
+  <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
+</body>
+</html>

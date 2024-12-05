@@ -1,0 +1,28 @@
+.heading-section {
+  background: linear-gradient(to right, rgb(2, 228, 171), rgb(74, 215, 240));
+  padding: 100px;
+}
+
+.heading-title {
+  color: white;
+  font-size: xx-large;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0px 1px 2px rgba(black, 0.2);
+}
+
+.card {
+  top: -50px;
+  background: white;
+  border: none;
+  border-style: 0px 4px 4px rgba(black, 0.2);
+  border-radius: 6px;
+  padding: 20px;
+  margin: auto;
+  width: 600px;
+}
+
+.card-title {
+  font-size: large;
+  font-weight: bold;
+}
